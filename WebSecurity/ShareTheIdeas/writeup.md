@@ -84,13 +84,12 @@ When input is **not sanitised**, whatever the user types is passed directly into
 
 To confirm the vulnerability, a classic SQL injection payload is submitted in the comment input field:
 
-<p align="center">
-<img width="414" height="149" alt="image" src="https://github.com/user-attachments/assets/6ccb2c26-0ea1-474d-a30f-18f7c93222a9" />
-</p>
-
 ```sql
 ' OR '1'='1'
 ```
+<p align="center">
+<img width="414" height="149" alt="image" src="https://github.com/user-attachments/assets/6ccb2c26-0ea1-474d-a30f-18f7c93222a9" />
+</p>
 
 **How it works:**
 
@@ -132,13 +131,14 @@ This is actually a **good sign** for the attacker. The error means:
 
 To identify the database engine, the following payload is injected:
 
-<p align="center">
-<img width="938" height="310" alt="image" src="https://github.com/user-attachments/assets/2f7f9c6c-12da-46e8-9d7b-d6a129b8dff0" />
-</p>
 
 ```sql
 ' || (select sqlite_version()));--
 ```
+
+<p align="center">
+<img width="938" height="310" alt="image" src="https://github.com/user-attachments/assets/2f7f9c6c-12da-46e8-9d7b-d6a129b8dff0" />
+</p>
 
 **How it works:**
 
@@ -157,13 +157,14 @@ The application returns the version number **`3.8.7.1`** in the comment list, co
 
 To discover what tables and columns exist in the database, the following payload is used:
 
+```sql
+' || (SELECT sql FROM sqlite_master));--
+```
+
 <p align="center">
 <img width="937" height="305" alt="image" src="https://github.com/user-attachments/assets/ecca7384-351c-44fd-b90f-6d294b8a2067" />
 </p>
 
-```sql
-' || (SELECT sql FROM sqlite_master));--
-```
 
 **How it works:**
 
