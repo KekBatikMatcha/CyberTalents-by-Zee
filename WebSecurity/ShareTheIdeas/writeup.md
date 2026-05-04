@@ -308,6 +308,12 @@ The application passes user input directly into SQL queries without any sanitisa
 
 # Exploitation Flow (OWASP A03 Mapping)
 
+<p>
+  <img width="401" height="373" alt="image" src="https://github.com/user-attachments/assets/c644b38e-01fc-4ae6-b996-7a872a441532" />
+</p>
+
+
+
 1. Attacker accesses the application and registers an account
 2. A comment is submitted and appears unsanitised on the page
 3. `' OR '1'='1'` payload confirms the injection point via an error
