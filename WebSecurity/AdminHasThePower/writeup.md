@@ -10,7 +10,7 @@ http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/
 
 ---
 
-## Initial Interface
+## 1. Initial Interface
 
 The challenge introduces a web application where only administrators are allowed to access the flag.
 
@@ -22,7 +22,7 @@ This is the starting point of the application.
 
 ---
 
-## Login Interface
+## 2. Login Interface
 
 The application presents a login form requiring a username and password.
 
@@ -34,7 +34,7 @@ No valid credentials are directly provided at this stage, indicating that they m
 
 ---
 
-## Source Code Analysis
+## 3. Source Code Analysis
 
 By inspecting the page source code, a hidden comment is discovered containing credentials:
 
@@ -48,7 +48,7 @@ This reveals hardcoded credentials exposed on the client side.
 
 ---
 
-## Successful Login
+## 4. Successful Login
 
 Using the discovered credentials (`support`), authentication is successful and access to the user dashboard is granted.
 
@@ -58,7 +58,7 @@ Using the discovered credentials (`support`), authentication is successful and a
 
 ---
 
-## Cookie Inspection (Browser DevTools)
+## 5. Cookie Inspection (Browser DevTools)
 
 Using browser Developer Tools (Application tab), the session cookie is inspected.
 
@@ -70,7 +70,7 @@ A `role` parameter is identified, which is responsible for controlling user priv
 
 ---
 
-## Cookie Manipulation
+## 6. Cookie Manipulation
 
 The role value is modified from:
 
@@ -85,7 +85,7 @@ After refreshing the page, the application grants elevated privileges.
 
 ---
 
-## Flag Obtained
+## 7. Flag Obtained
 
 After modifying the cookie, admin access is granted and the flag is revealed:
 
@@ -101,7 +101,7 @@ After modifying the cookie, admin access is granted and the flag is revealed:
 
 ---
 
-## Burp Suite Setup
+## 8. Burp Suite Setup
 
 Burp Suite is launched with Proxy Intercept enabled to capture HTTP traffic between the browser and the server.
 
@@ -111,7 +111,7 @@ Burp Suite is launched with Proxy Intercept enabled to capture HTTP traffic betw
 
 ---
 
-## Accessing the Challenge via Burp Browser
+## 9. Accessing the Challenge via Burp Browser
 
 The challenge URL is opened using the Burp Suite embedded browser to enable traffic interception.
 
@@ -121,7 +121,7 @@ The challenge URL is opened using the Burp Suite embedded browser to enable traf
 
 ---
 
-## Intercepting Login Request
+## 10. Intercepting Login Request
 
 The login request is intercepted while using the `support` credentials, capturing session-related data.
 
@@ -131,7 +131,7 @@ The login request is intercepted while using the `support` credentials, capturin
 
 ---
 
-## 📤 Sending Request to Repeater
+## 11. Sending Request to Repeater
 
 The intercepted request is sent to the Burp Suite Repeater tool for further analysis and modification.
 
@@ -141,7 +141,7 @@ The intercepted request is sent to the Burp Suite Repeater tool for further anal
 
 ---
 
-## Response Analysis
+## 12. Response Analysis
 
 The request is processed in Repeater, allowing inspection of the server’s response behavior.
 
@@ -151,7 +151,7 @@ The request is processed in Repeater, allowing inspection of the server’s resp
 
 ---
 
-## Cookie Manipulation via Burp Suite
+## 13. Cookie Manipulation via Burp Suite
 
 The session cookie is identified in the request and modified:
 
@@ -166,7 +166,7 @@ The modified request is then resent to the server.
 
 ---
 
-## Final Exploitation Result
+## 14. Final Exploitation Result
 
 After resending the modified request, the server grants admin access and reveals the flag:
 
