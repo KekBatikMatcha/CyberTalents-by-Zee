@@ -32,7 +32,7 @@ However, no valid credentials are provided directly to the user at this stage, s
 
 By inspecting the page source code, a hidden comment is discovered:
 
-> "For maintenance purposes, the credentials are: username = support and password = x34245323"
+> "For maintenance purposes, use this info (username = support and password = x34245323)"
 
 This indicates hardcoded credentials exposed in the client-side source code.
 
@@ -40,19 +40,15 @@ This indicates hardcoded credentials exposed in the client-side source code.
 <img width="959" height="385" alt="image" src="https://github.com/user-attachments/assets/15e011f1-50ec-4cc4-b586-c2b7a5d76e43" />
 </p>
 
-<p align="center">
-<img width="959" height="394" alt="image" src="https://github.com/user-attachments/assets/e21e7641-b656-4879-ab67-6ca33ae65111" />
-</p>
-
----
-
 ## 🔓 4. Successful Login
 
 Using the discovered credentials (`support`), successful authentication is achieved and access to the user dashboard is granted.
 
 <p align="center">
-<img width="959" height="387" alt="image" src="https://github.com/user-attachments/assets/4abab43f-3ec2-4425-807a-2ccc9f8e4c60" />
+<img width="959" height="394" alt="image" src="https://github.com/user-attachments/assets/e21e7641-b656-4879-ab67-6ca33ae65111" />
 </p>
+
+---
 
 ## 🍪 5. Cookie Inspection (Browser DevTools)
 
@@ -61,7 +57,7 @@ Using browser Developer Tools → Application tab, the session cookie is inspect
 A `role` value is identified, which controls user privileges.
 
 <p align="center">
-<img width="959" height="29" alt="image" src="https://github.com/user-attachments/assets/579d9082-77ae-4d5a-8dfa-2c5f67b0478c" />
+<img width="959" height="387" alt="image" src="https://github.com/user-attachments/assets/4abab43f-3ec2-4425-807a-2ccc9f8e4c60" />
 </p>
 
 ## ⚔️ 6. Cookie Manipulation
@@ -69,6 +65,10 @@ A `role` value is identified, which controls user privileges.
 The role value is modified from `support` to `àdmin`
 
 After refreshing the page, access privileges are escalated.
+
+<p align="center">
+<img width="959" height="29" alt="image" src="https://github.com/user-attachments/assets/579d9082-77ae-4d5a-8dfa-2c5f67b0478c" />
+</p>
 
 
 ## 🏁 7. Flag Obtained
