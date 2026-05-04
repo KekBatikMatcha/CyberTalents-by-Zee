@@ -237,38 +237,51 @@ The application returns the admin password in the comment list, which is the fla
 
 The same SQL injection payload is replicated using Burp Suite's **Repeater** tool by intercepting the request when the comment is submitted.
 
-Since the input is sent via a **GET request in the URL**, spaces cannot be used directly — they must be URL-encoded. In URL encoding, **`+`** is a valid substitute for a space character.
+The intercepted request shows the application is using a **POST** method to send the comment data to the server.
 
-So the payload becomes:
+<p align="center">
+<img width="743" height="368" alt="image" src="https://github.com/user-attachments/assets/3eaa2aa8-d515-42fa-bd85-d672db9a79e0" />
+</p>
+
+### GET vs POST — What's the Difference?
+
+These are two different HTTP methods used to send data between a browser and a server:
+
+| | GET | POST |
+|---|---|---|
+| **Where data is sent** | In the **URL** — visible in the address bar | In the **request body** — hidden from the URL |
+| **Example** | `website.com/search?q=hello` | Data sent silently in the background |
+| **Visibility** | Anyone can see it in the browser, logs, and history | Not visible in the URL |
+| **Use case** | Fetching/searching data | Submitting forms, login, posting comments |
+| **Can be bookmarked** | Yes | No |
+| **Data limit** | Limited by URL length | No practical limit |
+
+**In this challenge**, the comment submission uses **POST** — meaning the SQL injection payload is sent inside the request body, not in the URL. This is why in Burp Suite's Repeater, the payload appears in the body section of the request, not appended to the URL.
+
+Since the input is sent via **POST body**, spaces in the payload must still be handled carefully. In this context, **`+`** is used as a substitute for a space character, as it is a valid URL-encoded space representation:
 
 ```
-'+||+(select+password+from+xde43_users+where+role="admin"));--
+idea='+||+(select+password+from+xde43_users+where+role="admin"));--
 ```
 
 **Why `+` instead of spaces?**
 
-| Character | URL-encoded form | Meaning |
-|-----------|-----------------|---------|
-| ` ` (space) | `%20` or `+` | Both are valid space representations in a URL |
+| Character | Encoded Form | Meaning |
+|-----------|-------------|---------|
+| ` ` (space) | `%20` or `+` | Both are valid space representations in URL encoding |
 
-Using `+` keeps the payload readable while still being correctly interpreted by the server as spaces, allowing the SQL query to execute identically to the browser-based injection.
-
-The modified request is sent via Repeater and the server responds with `flag245698`, confirming the vulnerability is fully exploitable at the HTTP request level — not just through the browser interface.
-
-<p align="center">
-<img width="718" height="350" alt="image" src="https://github.com/user-attachments/assets/d2698aff-f98a-4286-be25-a103f61236c1" />
-</p>
+The modified POST request is sent via Repeater and the server responds with `flag245698`, confirming the vulnerability is fully exploitable at the HTTP request level — not just through the browser interface.
 
 ### Why Is the Input Not Sanitised?
 
 Looking at the application's behaviour, the input is not sanitised because:
 
 1. **Raw input is passed to the query** — the application takes whatever is typed and embeds it directly into the SQL string without escaping special characters like `'`, `"`, or `--`
-2. **No parameterised queries** — a secure application would use prepared statements where the query structure is fixed and user input is treated only as data, never as code
-3. **Error messages are exposed** — returning raw database errors like "unrecognized token" to the user leaks internal information and confirms injection is possible
+2. **No parameterised queries** — a secure application would use prepared statements where the query structure is fixed and user input is treated only as data, never as SQL code
+3. **Error messages are exposed** — returning raw database errors like "unrecognized token" leaks internal information and confirms injection is possible
 4. **No Web Application Firewall (WAF)** — there is no layer filtering or blocking known injection patterns before they reach the database
 
-A properly sanitised application would escape the single quote `'` in the input so that it cannot break out of the SQL string context, making injection impossible.
+A properly sanitised application would escape the single quote `'` so that it cannot break out of the SQL string context, making injection impossible regardless of what the user submits.
 
 ---
 
