@@ -60,6 +60,11 @@ This script handles the login validation entirely on the **client side**, which 
 
 Using the online deobfuscation tool [https://obf-io.deobfuscate.io/](https://obf-io.deobfuscate.io/), the obfuscated JavaScript is decoded into readable form:
 
+
+<p align="center">
+<img width="935" height="326" alt="image" src="https://github.com/user-attachments/assets/d5bc9f3c-3b19-473a-b588-ee742d06d32e" />
+</p>
+
 ```javascript
 var _0xae5b = ["value", "user", "getElementById", "pass", "Cyber-Talent", "Congratz \n\n", "wrong Password"];
 
@@ -82,10 +87,6 @@ function check() {
 | Password | `Cyber-Talent` |
 
 The `check()` function compares the input values directly against the hardcoded string `"Cyber-Talent"` for both fields. Since this validation runs entirely in the browser, the credentials are fully exposed to anyone who inspects the source.
-
-<p align="center">
-<img width="935" height="326" alt="image" src="https://github.com/user-attachments/assets/d5bc9f3c-3b19-473a-b588-ee742d06d32e" />
-</p>
 
 ---
 
