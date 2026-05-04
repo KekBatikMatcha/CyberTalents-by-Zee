@@ -243,6 +243,10 @@ The Base64 output is selected and sent to **Burp Suite's Decoder** tool for deco
 <img width="893" height="397" alt="image" src="https://github.com/user-attachments/assets/233b515c-4c93-4a2d-b9a0-24719bbcfed5" />
 </p>
 
+<p align="center">
+<img width="959" height="321" alt="image" src="https://github.com/user-attachments/assets/01c8aa2a-bf80-4c00-9183-890afb9cee4f" />
+</p>
+
 ---
 
 ## 6. Decoding via Online Tool — Flag Obtained
