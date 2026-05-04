@@ -67,6 +67,9 @@ This is an intentional hint from the challenge designer — it tells us to look 
 <img width="939" height="329" alt="image" src="https://github.com/user-attachments/assets/251d7cd2-b82c-4123-8826-3ee817ca2d7f" />
 </p>
 
+<img width="731" height="302" alt="image" src="https://github.com/user-attachments/assets/6a935190-6bf9-4d13-95df-176ad1dc3ed4" />
+
+
 ### Why Does the `?home=` Parameter Suggest LFI?
 
 When a website uses a URL parameter to load different pages like `?home=about`, `?home=projects`, the backend PHP code is likely doing something like this:
