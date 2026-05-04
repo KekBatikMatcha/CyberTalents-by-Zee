@@ -4,7 +4,7 @@
 **Administrators only has the power to see the flag, can you be one?**
 
 ## Challenge Link
-http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/
+**http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/**
 
 ## 1. Initial Interface
 
