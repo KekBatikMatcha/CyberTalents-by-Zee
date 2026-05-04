@@ -103,7 +103,7 @@ Substituting the array values:
 ```javascript
 var _0xeb80x2 = document.getElementById("user").value;
 ```
-#### **a) Gets whatever the user typed into the **username field** and stores it in `_0xeb80x2`.**
+#### a) Gets whatever the user typed into the **username field** and stores it in `_0xeb80x2`.
 
 ---
 
@@ -113,7 +113,7 @@ Substituting:
 ```javascript
 var _0xeb80x3 = document.getElementById("pass").value;
 ```
-#### **b) Gets whatever the user typed into the **password field** and stores it in `_0xeb80x3`.**
+#### b) Gets whatever the user typed into the **password field** and stores it in `_0xeb80x3`.
 
 ---
 
@@ -125,8 +125,8 @@ if (_0xeb80x2 == "Cyber-Talent" && _0xeb80x3 == "Cyber-Talent") {
     alert("wrong Password");
 }
 ```
-#### **c) If **both** username AND password equal `"Cyber-Talent"`, the congratulations alert fires and reveals the flag. Otherwise, it shows "wrong Password".
-**
+#### c) If **both** username AND password equal `"Cyber-Talent"`, the congratulations alert fires and reveals the flag. Otherwise, it shows "wrong Password".
+
 **The Full Clean Version:**
 
 Stripping away all obfuscation, the entire function simplifies to:
