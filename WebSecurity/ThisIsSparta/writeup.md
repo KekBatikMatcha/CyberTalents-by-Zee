@@ -8,7 +8,7 @@
 **FLAG Format:** `{flagbody}`
 
 ## Challenge Link
-http://cdcamxwl32pue3e6m4m2360mtg301m236mnkmugv0-web.cybertalentslabs.com/
+https://cybertalents.com/challenges/web/this-is-sparta
 
 ---
 
