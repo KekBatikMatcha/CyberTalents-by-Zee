@@ -8,9 +8,19 @@ http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/
 
 ## 🖼️ Initial Interface
 
+This is the initial CyberTalents challenge page for **"Admin Has The Power"**.
+
+It introduces the objective of the challenge, where only administrators are allowed to access the flag.
+
 <p align="center">
 <img width="959" height="368" alt="image" src="https://github.com/user-attachments/assets/877e16af-492d-4c53-b87d-e43fb04a1d30" />
 </p>
+
+## 🔐 2. Login Interface
+
+The login page displays a username and password field.
+
+However, no valid credentials are provided directly to the user at this stage, suggesting that they may be hidden elsewhere.
 
 <p align="center">
 <img width="959" height="389" alt="image" src="https://github.com/user-attachments/assets/b72aed92-82ab-410f-ae95-8d6d8d8dc0e0" />
@@ -18,7 +28,13 @@ http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/
 
 ---
 
-## 🔍 Source Code Analysis
+## 🔍 3. Source Code Analysis
+
+By inspecting the page source code, a hidden comment is discovered:
+
+> "For maintenance purposes, the credentials are: username = support and password = x34245323"
+
+This indicates hardcoded credentials exposed in the client-side source code.
 
 <p align="center">
 <img width="959" height="385" alt="image" src="https://github.com/user-attachments/assets/15e011f1-50ec-4cc4-b586-c2b7a5d76e43" />
@@ -30,15 +46,36 @@ http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/
 
 ---
 
-## 🔐 Authentication & Session Testing
+## 🔓 4. Successful Login
+
+Using the discovered credentials (`support`), successful authentication is achieved and access to the user dashboard is granted.
 
 <p align="center">
 <img width="959" height="387" alt="image" src="https://github.com/user-attachments/assets/4abab43f-3ec2-4425-807a-2ccc9f8e4c60" />
 </p>
 
+## 🍪 5. Cookie Inspection (Browser DevTools)
+
+Using browser Developer Tools → Application tab, the session cookie is inspected.
+
+A `role` value is identified, which controls user privileges.
+
 <p align="center">
 <img width="959" height="29" alt="image" src="https://github.com/user-attachments/assets/579d9082-77ae-4d5a-8dfa-2c5f67b0478c" />
 </p>
+
+## ⚔️ 6. Cookie Manipulation
+
+The role value is modified from `support` to `àdmin`
+
+After refreshing the page, access privileges are escalated.
+
+
+## 🏁 7. Flag Obtained
+
+After modifying the cookie, the application grants admin access and reveals the flag:
+
+> Admin Secret flag: `hiadminyouhavethepower`
 
 <p align="center">
 <img width="937" height="355" alt="image" src="https://github.com/user-attachments/assets/8087a3b6-98dd-44f9-80da-bba8e6c0566a" />
