@@ -1,26 +1,32 @@
-# Admin Has The Power - CyberTalents
+# 🧩 Admin Has The Power - CyberTalents
 
-## Challenge Description
+---
+
+## 📌 Challenge Description
 **Administrators only has the power to see the flag, can you be one?**
 
-## Challenge Link
-**http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/**
+## 🔗 Challenge Link
+http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/
 
-## 1. Initial Interface
+---
 
-This is the initial CyberTalents challenge page for **"Admin Has The Power"**.
+## 🖥️ Initial Interface
 
-It introduces the objective of the challenge, where only administrators are allowed to access the flag.
+The challenge introduces a web application where only administrators are allowed to access the flag.
+
+This is the starting point of the application.
 
 <p align="center">
 <img width="900" height="368" alt="image" src="https://github.com/user-attachments/assets/877e16af-492d-4c53-b87d-e43fb04a1d30" />
 </p>
 
-## 2. Login Interface
+---
 
-The login page displays a username and password field.
+## 🔐 Login Interface
 
-However, no valid credentials are provided directly to the user at this stage, suggesting that they may be hidden elsewhere.
+The application presents a login form requiring a username and password.
+
+No valid credentials are directly provided at this stage, indicating that they may be hidden within the application.
 
 <p align="center">
 <img width="959" height="389" alt="image" src="https://github.com/user-attachments/assets/b72aed92-82ab-410f-ae95-8d6d8d8dc0e0" />
@@ -28,21 +34,23 @@ However, no valid credentials are provided directly to the user at this stage, s
 
 ---
 
-## 3. Source Code Analysis
+## 🔍 Source Code Analysis
 
-By inspecting the page source code, a hidden comment is discovered:
+By inspecting the page source code, a hidden comment is discovered containing credentials:
 
 > "For maintenance purposes, use this info (username = support and password = x34245323)"
 
-This indicates hardcoded credentials exposed in the client-side source code.
+This reveals hardcoded credentials exposed on the client side.
 
 <p align="center">
 <img width="959" height="385" alt="image" src="https://github.com/user-attachments/assets/15e011f1-50ec-4cc4-b586-c2b7a5d76e43" />
 </p>
 
-## 4. Successful Login
+---
 
-Using the discovered credentials (`support`), successful authentication is achieved and access to the user dashboard is granted.
+## 🔓 Successful Login
+
+Using the discovered credentials (`support`), authentication is successful and access to the user dashboard is granted.
 
 <p align="center">
 <img width="959" height="394" alt="image" src="https://github.com/user-attachments/assets/e21e7641-b656-4879-ab67-6ca33ae65111" />
@@ -50,32 +58,36 @@ Using the discovered credentials (`support`), successful authentication is achie
 
 ---
 
-## 5. Cookie Inspection (Browser DevTools)
+## 🍪 Cookie Inspection (Browser DevTools)
 
-Using browser Developer Tools → Application tab
+Using browser Developer Tools (Application tab), the session cookie is inspected.
 
-the session cookie is inspected.
-
-A `role` value is identified, which controls user privileges.
+A `role` parameter is identified, which is responsible for controlling user privileges.
 
 <p align="center">
 <img width="959" height="387" alt="image" src="https://github.com/user-attachments/assets/4abab43f-3ec2-4425-807a-2ccc9f8e4c60" />
 </p>
 
-## 6. Cookie Manipulation
+---
 
-The role value is modified from `support` to `admin`
+## ⚔️ Cookie Manipulation
 
-After refreshing the page, access privileges are escalated.
+The role value is modified from:
+
+`support` → `admin`
+
+
+After refreshing the page, the application grants elevated privileges.
 
 <p align="center">
 <img width="400" height="29" alt="image" src="https://github.com/user-attachments/assets/579d9082-77ae-4d5a-8dfa-2c5f67b0478c" />
 </p>
 
+---
 
-## 7. Flag Obtained
+## 🏁 Flag Obtained
 
-After modifying the cookie, the application grants admin access and reveals the flag:
+After modifying the cookie, admin access is granted and the flag is revealed:
 
 > Admin Secret flag: `hiadminyouhavethepower`
 
@@ -85,67 +97,78 @@ After modifying the cookie, the application grants admin access and reveals the 
 
 ---
 
-##  Burp Suite Analysis
+# 🧪 Burp Suite Analysis
 
-## 8. Burp Suite Setup
+---
 
-Burp Suite is launched and Proxy Intercept mode is enabled.  
+## 🛠️ Burp Suite Setup
+
+Burp Suite is launched with Proxy Intercept enabled to capture HTTP traffic between the browser and the server.
 
 <p align="center">
 <img width="953" height="462" alt="image" src="https://github.com/user-attachments/assets/19f06923-1cae-4825-b610-730149e03586" />
 </p>
 
-## 9. Accessing Challenge via Burp Browser
+---
 
-The browser is opened through Burp Suite to capture HTTP traffic.
+## 🌐 Accessing the Challenge via Burp Browser
+
+The challenge URL is opened using the Burp Suite embedded browser to enable traffic interception.
 
 <p align="center">
 <img width="959" height="491" alt="image" src="https://github.com/user-attachments/assets/cd6a58e1-dc48-4ad4-bb2c-a1e92aba79da" />
 </p>
 
-## 10. Intercepting Login Request
+---
 
-The challenge URL is opened inside the Burp Suite embedded browser to allow interception of requests.
+## 🔐 Intercepting Login Request
+
+The login request is intercepted while using the `support` credentials, capturing session-related data.
 
 <p align="center">
 <img width="269" height="107" alt="image" src="https://github.com/user-attachments/assets/adf86d96-99d1-48de-8bff-c0412120457c" />
 </p>
 
-## 11. Sending Request to Repeater
+---
 
-During login using the `support` credentials, Burp Suite captures the HTTP request containing session cookies.
+## 📤 Sending Request to Repeater
+
+The intercepted request is sent to the Burp Suite Repeater tool for further analysis and modification.
 
 <p align="center">
 <img width="959" height="413" alt="image" src="https://github.com/user-attachments/assets/a4ab311c-60e9-4d30-83ff-206ffb9ffb8b" />
 </p>
 
-## 12. Response Analysis
+---
 
-The intercepted request is forwarded to the **Repeater** tool for modification and testing.
+## 🔁 Response Analysis
+
+The request is processed in Repeater, allowing inspection of the server’s response behavior.
 
 <p align="center">
 <img width="221" height="314" alt="image" src="https://github.com/user-attachments/assets/c948f10c-c673-45c6-8e01-174cf728f465" />
 </p>
 
-## 13. Cookie Manipulation via Burp Suite
+---
 
-The server response is analyzed after sending the request, revealing the current session behavior.
+## ⚔️ Cookie Manipulation via Burp Suite
 
-<p align="center">
-<img width="937" height="430" alt="image" src="https://github.com/user-attachments/assets/2bc26e2c-80e0-4c67-8a2e-ae6f2313447f" />
-</p>
+The session cookie is identified in the request and modified:
 
-The `role=support` value in the request header is modified to: `admin`
+role=`support` → role=`admin`
+
+
+The modified request is then resent to the server.
 
 <p align="center">
 <img width="302" height="42" alt="image" src="https://github.com/user-attachments/assets/6207a278-85cb-41d7-808e-59c33db756ab" />
 </p>
 
-The request is resent.
+---
 
-## 14. Final Exploitation Result
+## 🏁 Final Exploitation Result
 
-After modifying the cookie in Burp Suite and resending the request, the server returns admin access and reveals the flag:
+After resending the modified request, the server grants admin access and reveals the flag:
 
 > Admin Secret flag: `hiadminyouhavethepower`
 
@@ -155,7 +178,7 @@ After modifying the cookie in Burp Suite and resending the request, the server r
 
 ---
 
-##  OWASP Classification
+# 🔐 OWASP Classification
 
 This vulnerability falls under:
 
@@ -165,20 +188,18 @@ Broken Access Control occurs when an application fails to properly enforce user 
 
 ---
 
-##  Why this is a security issue
+# ❗ Why this is a security issue
 
-In this application, user roles are stored in a client-side cookie.
-
-The server incorrectly trusts this value without validation.
+The application stores user roles in a client-side cookie and trusts this value without proper validation.
 
 This allows attackers to:
-- Modify their role from user → admin
-- Bypass authorization controls
-- Gain unauthorized access to restricted functionality
+- Modify their role from user → admin  
+- Bypass authorization controls  
+- Gain unauthorized access to restricted functionality  
 
 ---
 
-##  Exploitation Flow (OWASP A01 Mapping)
+# ⚔️ Exploitation Flow (OWASP A01 Mapping)
 
 <p align="center">
 <img width="377" height="291" alt="image" src="https://github.com/user-attachments/assets/74e37b94-a862-4fea-bd8c-d90edb106d45" />
@@ -194,21 +215,6 @@ This allows attackers to:
 
 ---
 
-##  Conclusion
+# 🧠 Conclusion
 
-This challenge demonstrates **OWASP A01: Broken Access Control**, where user roles stored in client-side cookies can be manipulated to escalate privileges due to missing server-side authorization checks.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+This challenge demonstrates **OWASP A01: Broken Access Control**, where insecure handling of client-side cookies allows privilege escalation due to missing server-side authorization checks.
