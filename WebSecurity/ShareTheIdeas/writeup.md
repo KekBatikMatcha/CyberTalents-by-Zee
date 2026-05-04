@@ -132,6 +132,10 @@ This is actually a **good sign** for the attacker. The error means:
 
 To identify the database engine, the following payload is injected:
 
+<p align="center">
+<img width="938" height="310" alt="image" src="https://github.com/user-attachments/assets/2f7f9c6c-12da-46e8-9d7b-d6a129b8dff0" />
+</p>
+
 ```sql
 ' || (select sqlite_version()));--
 ```
@@ -152,6 +156,10 @@ The application returns the version number **`3.8.7.1`** in the comment list, co
 ## 9. Extracting the Database Schema
 
 To discover what tables and columns exist in the database, the following payload is used:
+
+<p align="center">
+<img width="937" height="305" alt="image" src="https://github.com/user-attachments/assets/ecca7384-351c-44fd-b90f-6d294b8a2067" />
+</p>
 
 ```sql
 ' || (SELECT sql FROM sqlite_master));--
@@ -180,9 +188,7 @@ This reveals:
 - The table name is **`xde43_users`**
 - It contains the columns: `id`, `name`, `email`, `password`, and `role`
 
-<p align="center">
-<img width="938" height="310" alt="image" src="https://github.com/user-attachments/assets/2f7f9c6c-12da-46e8-9d7b-d6a129b8dff0" />
-</p>
+
 
 ### How Do We Know the Role is "admin"?
 
@@ -216,10 +222,6 @@ With the table structure fully known, the admin password is extracted directly:
 The application returns the admin password in the comment list, which is the flag:
 
 > **FLAG: `flag245698`**
-
-<p align="center">
-<img width="937" height="305" alt="image" src="https://github.com/user-attachments/assets/ecca7384-351c-44fd-b90f-6d294b8a2067" />
-</p>
 
 <p align="center">
 <img width="958" height="286" alt="image" src="https://github.com/user-attachments/assets/57036fd5-386c-4cb9-a5f2-9e024f05a521" />
