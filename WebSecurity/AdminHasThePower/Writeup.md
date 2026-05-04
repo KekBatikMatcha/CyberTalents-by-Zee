@@ -13,7 +13,7 @@ This is the initial CyberTalents challenge page for **"Admin Has The Power"**.
 It introduces the objective of the challenge, where only administrators are allowed to access the flag.
 
 <p align="center">
-<img width="959" height="368" alt="image" src="https://github.com/user-attachments/assets/877e16af-492d-4c53-b87d-e43fb04a1d30" />
+<img width="900" height="368" alt="image" src="https://github.com/user-attachments/assets/877e16af-492d-4c53-b87d-e43fb04a1d30" />
 </p>
 
 ##  2. Login Interface
