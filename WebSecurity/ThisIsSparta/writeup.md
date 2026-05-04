@@ -28,8 +28,9 @@ Upon navigating to the challenge URL, a login form is presented requiring a **us
 
 A **Hint** button is also available — clicking it reveals the hint: *"easier than ableton"*, suggesting the credentials may be discoverable through client-side analysis.
 
+<p align="center">
 <img width="944" height="415" alt="image" src="https://github.com/user-attachments/assets/2b9d0cd3-05f6-4020-b104-a784f8b7992f" />
-
+</p>
 
 ---
 
