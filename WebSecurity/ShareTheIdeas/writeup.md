@@ -308,8 +308,8 @@ The application passes user input directly into SQL queries without any sanitisa
 
 # Exploitation Flow (OWASP A03 Mapping)
 
-<p>
-  <img width="401" height="373" alt="image" src="https://github.com/user-attachments/assets/c644b38e-01fc-4ae6-b996-7a872a441532" />
+<p align="center">
+  <img width="501" height="373" alt="image" src="https://github.com/user-attachments/assets/c644b38e-01fc-4ae6-b996-7a872a441532" />
 </p>
 
 
