@@ -38,6 +38,10 @@ A **Hint** button is also available — clicking it reveals the hint: *"easier t
 
 Inspecting the page source reveals an obfuscated JavaScript snippet embedded in the application.
 
+<p align="center">
+<img width="945" height="429" alt="image" src="https://github.com/user-attachments/assets/5736633d-0bbd-4549-8be4-ace90550c205" />
+</p>
+
 The obfuscated code uses hexadecimal string encoding to hide its logic:
 
 ```javascript
@@ -50,9 +54,6 @@ var _0xae5b=
 
 This script handles the login validation entirely on the **client side**, which is a critical vulnerability — the logic and credentials are embedded directly in the browser.
 
-<p align="center">
-<img width="945" height="429" alt="image" src="https://github.com/user-attachments/assets/5736633d-0bbd-4549-8be4-ace90550c205" />
-</p>
 
 ---
 
