@@ -79,6 +79,71 @@ function check() {
 }
 ```
 
+### Code Explanation
+
+**The Array — `_0xae5b`**
+
+The obfuscator replaced every readable string with an array index lookup instead of writing the strings directly, making the code harder to read at a glance. Once decoded, the array holds:
+
+| Index | Value |
+|-------|-------|
+| `[0]` | `"value"` |
+| `[1]` | `"user"` |
+| `[2]` | `"getElementById"` |
+| `[3]` | `"pass"` |
+| `[4]` | `"Cyber-Talent"` |
+| `[5]` | `"Congratz \n\n"` |
+| `[6]` | `"wrong Password"` |
+
+**Line by Line Breakdown**
+
+`var _0xeb80x2 = document[_0xae5b[2]](_0xae5b[1])[_0xae5b[0]];`
+
+Substituting the array values:
+```javascript
+var _0xeb80x2 = document.getElementById("user").value;
+```
+a) Gets whatever the user typed into the **username field** and stores it in `_0xeb80x2`.
+
+---
+
+`var _0xeb80x3 = document[_0xae5b[2]](_0xae5b[3])[_0xae5b[0]];`
+
+Substituting:
+```javascript
+var _0xeb80x3 = document.getElementById("pass").value;
+```
+b) Gets whatever the user typed into the **password field** and stores it in `_0xeb80x3`.
+
+---
+
+**The `if` Check:**
+```javascript
+if (_0xeb80x2 == "Cyber-Talent" && _0xeb80x3 == "Cyber-Talent") {
+    alert("Congratz");      // FLAG revealed here
+} else {
+    alert("wrong Password");
+}
+```
+c) If **both** username AND password equal `"Cyber-Talent"`, the congratulations alert fires and reveals the flag. Otherwise, it shows "wrong Password".
+
+**The Full Clean Version:**
+
+Stripping away all obfuscation, the entire function simplifies to:
+
+```javascript
+function check() {
+  var username = document.getElementById("user").value;
+  var password = document.getElementById("pass").value;
+
+  if (username == "Cyber-Talent" && password == "Cyber-Talent") {
+    alert("Congratz");
+  } else {
+    alert("wrong Password");
+  }
+}
+```
+
 **Findings from the deobfuscated code:**
 
 | Field    | Value          |
