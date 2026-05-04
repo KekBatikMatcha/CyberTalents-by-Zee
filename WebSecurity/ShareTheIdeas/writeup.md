@@ -6,7 +6,7 @@
 **Can you reveal the admin password?**
 
 ## Challenge Link
-http://cdcamxwl32pue3e6m4m2360mtg301m236mnkmugv0-web.cybertalentslabs.com/
+https://cybertalents.com/challenges/web/share-ideas
 
 ---
 
@@ -311,7 +311,6 @@ The application passes user input directly into SQL queries without any sanitisa
 <p align="center">
   <img width="501" height="373" alt="image" src="https://github.com/user-attachments/assets/c644b38e-01fc-4ae6-b996-7a872a441532" />
 </p>
-
 
 
 1. Attacker accesses the application and registers an account
