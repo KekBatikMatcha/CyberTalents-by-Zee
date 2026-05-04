@@ -56,10 +56,16 @@ A new account is registered via the Register link in order to gain access to the
 
 ## 5. Successful Login & Unsanitised Input Discovered
 
-After logging in, the registered email is displayed confirming authentication was successful. A comment is then submitted through the input field — and it renders directly on the page **without any sanitisation**.
+After logging in, the registered email is displayed confirming authentication was successful. 
 
 <p align="center">
 <img width="915" height="280" alt="image" src="https://github.com/user-attachments/assets/6973671d-5cdc-490d-845b-26daf5b87124" />
+</p>
+
+A **idea** is then submitted through the input field — and it renders directly on the page **without any sanitisation**.
+
+<p align="center">
+<img width="944" height="428" alt="image" src="https://github.com/user-attachments/assets/52d72f11-3e45-4105-888f-2b476543d50f" />
 </p>
 
 ### What is Sanitisation — and Why Does it Matter?
@@ -97,10 +103,6 @@ SELECT * FROM comments WHERE input = '' OR '1'='1';
 ```
 
 Since `'1'='1'` is always `true`, the `WHERE` condition is bypassed and the query returns data.
-
-<p align="center">
-<img width="944" height="428" alt="image" src="https://github.com/user-attachments/assets/52d72f11-3e45-4105-888f-2b476543d50f" />
-</p>
 
 ---
 
