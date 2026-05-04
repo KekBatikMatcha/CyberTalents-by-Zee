@@ -67,12 +67,36 @@ This is an intentional hint from the challenge designer — it tells us to look 
 <img width="939" height="329" alt="image" src="https://github.com/user-attachments/assets/251d7cd2-b82c-4123-8826-3ee817ca2d7f" />
 </p>
 
-<img width="731" height="302" alt="image" src="https://github.com/user-attachments/assets/6a935190-6bf9-4d13-95df-176ad1dc3ed4" />
+---
 
+### Confirming the `?home=` Parameter via Burp Suite
+
+To confirm how the `?home=` parameter is being handled, **Burp Suite** is used to intercept the HTTP traffic when clicking on any of the navigation links.
+
+The intercepted request reveals a **GET** request with the `home` value passed directly in the URL:
+
+```
+GET /index.php?home=about HTTP/1.1
+Host: [challenge-url]
+```
+
+<p align="center">
+<img width="731" height="302" alt="image" src="https://github.com/user-attachments/assets/6a935190-6bf9-4d13-95df-176ad1dc3ed4" />
+</p>
+
+This is significant because it confirms:
+
+| Observation | Why It Matters |
+|-------------|---------------|
+| The `home` value is in the **URL query string** | It is fully controlled by the user — anyone can change it to anything |
+| It is sent as a **GET parameter** | No hidden form processing — the value goes straight to the server as-is |
+| The server processes it to load a page | The backend is likely using `include()` with this value, making it an LFI target |
+
+---
 
 ### Why Does the `?home=` Parameter Suggest LFI?
 
-When a website uses a URL parameter to load different pages like `?home=about`, `?home=projects`, the backend PHP code is likely doing something like this:
+When a website uses a URL parameter to load different pages like `?home=about` or `?home=projects`, the backend PHP code is likely doing something like this behind the scenes:
 
 ```php
 include($_GET['home'] . '.php');
@@ -83,7 +107,7 @@ This means whatever value is passed in `?home=` gets loaded as a file on the ser
 - Try `?home=../../../../etc/passwd` to read system files (directory traversal)
 - Try PHP wrappers like `php://filter` to read the server's own PHP source files
 
-The first attempt using `../` directory traversal returned nothing — meaning the server likely has some basic filter against it. This leads to trying **PHP stream wrappers** instead.
+The first attempt using `../` directory traversal returned nothing — meaning the server likely has a basic filter against it. This leads to trying **PHP stream wrappers** instead.
 
 ---
 
