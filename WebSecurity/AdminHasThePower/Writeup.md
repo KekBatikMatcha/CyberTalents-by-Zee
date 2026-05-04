@@ -88,57 +88,58 @@ After modifying the cookie, the application grants admin access and reveals the 
 ## 🛠️ 8. Burp Suite Setup
 
 Burp Suite is launched and Proxy Intercept mode is enabled.  
-The browser is opened through Burp Suite to capture HTTP traffic.
 
 <p align="center">
 <img width="953" height="462" alt="image" src="https://github.com/user-attachments/assets/19f06923-1cae-4825-b610-730149e03586" />
 </p>
 
-## 🌐 9. Accessing Challenge via Burp Browser
+##  9. Accessing Challenge via Burp Browser
 
-The challenge URL is opened inside the Burp Suite embedded browser to allow interception of requests.
+The browser is opened through Burp Suite to capture HTTP traffic.
 
 <p align="center">
 <img width="959" height="491" alt="image" src="https://github.com/user-attachments/assets/cd6a58e1-dc48-4ad4-bb2c-a1e92aba79da" />
 </p>
 
-## 🔐 10. Intercepting Login Request
+##  10. Intercepting Login Request
 
-During login using the `support` credentials, Burp Suite captures the HTTP request containing session cookies.
+The challenge URL is opened inside the Burp Suite embedded browser to allow interception of requests.
 
 <p align="center">
 <img width="269" height="107" alt="image" src="https://github.com/user-attachments/assets/adf86d96-99d1-48de-8bff-c0412120457c" />
 </p>
 
-## 📤 11. Sending Request to Repeater
+##  11. Sending Request to Repeater
 
-The intercepted request is forwarded to the **Repeater** tool for modification and testing.
+During login using the `support` credentials, Burp Suite captures the HTTP request containing session cookies.
 
 <p align="center">
 <img width="959" height="413" alt="image" src="https://github.com/user-attachments/assets/a4ab311c-60e9-4d30-83ff-206ffb9ffb8b" />
 </p>
 
-## 🔁 12. Response Analysis
+##  12. Response Analysis
 
-The server response is analyzed after sending the request, revealing the current session behavior.
+The intercepted request is forwarded to the **Repeater** tool for modification and testing.
 
 <p align="center">
 <img width="221" height="314" alt="image" src="https://github.com/user-attachments/assets/c948f10c-c673-45c6-8e01-174cf728f465" />
 </p>
 
-## ⚔️ 13. Cookie Manipulation via Burp Suite
+##  13. Cookie Manipulation via Burp Suite
 
-The `role=support` value in the request header is modified to: `admin`
-
-The request is resent.
+The server response is analyzed after sending the request, revealing the current session behavior.
 
 <p align="center">
 <img width="937" height="430" alt="image" src="https://github.com/user-attachments/assets/2bc26e2c-80e0-4c67-8a2e-ae6f2313447f" />
 </p>
 
+The `role=support` value in the request header is modified to: `admin`
+
 <p align="center">
 <img width="302" height="42" alt="image" src="https://github.com/user-attachments/assets/6207a278-85cb-41d7-808e-59c33db756ab" />
 </p>
+
+The request is resent.
 
 ## 🏁 14. Final Exploitation Result
 
@@ -152,7 +153,7 @@ After modifying the cookie in Burp Suite and resending the request, the server r
 
 ---
 
-## 🔐 OWASP Classification
+##  OWASP Classification
 
 This vulnerability falls under:
 
@@ -162,7 +163,7 @@ Broken Access Control occurs when an application fails to properly enforce user 
 
 ---
 
-## ❗ Why this is a security issue
+##  Why this is a security issue
 
 In this application, user roles are stored in a client-side cookie.
 
@@ -175,7 +176,7 @@ This allows attackers to:
 
 ---
 
-## ⚔️ Exploitation Flow (OWASP A01 Mapping)
+##  Exploitation Flow (OWASP A01 Mapping)
 
 <p align="center">
 <img width="377" height="291" alt="image" src="https://github.com/user-attachments/assets/74e37b94-a862-4fea-bd8c-d90edb106d45" />
@@ -191,7 +192,7 @@ This allows attackers to:
 
 ---
 
-## 🏁 Conclusion
+##  Conclusion
 
 This challenge demonstrates **OWASP A01: Broken Access Control**, where user roles stored in client-side cookies can be manipulated to escalate privileges due to missing server-side authorization checks.
 
