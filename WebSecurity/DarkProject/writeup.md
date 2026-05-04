@@ -38,39 +38,49 @@ This wording is an intentional hint from the challenge designer — it signals t
 
 ---
 
-## 3. Source Code Analysis — Unsanitised URL Parameter
+## 3. Source Code Analysis — Identifying the Vulnerability Hint
 
-Inspecting the page source reveals a critical piece of PHP code embedded in the page:
+Inspecting the page source in the browser reveals the HTML that the server sent back. The PHP code itself is **never visible** here — PHP runs on the server before sending the page, so the browser only sees the final HTML output.
 
-```php
-<?php
-if(!preg_match('/\.\./', $_GET['home'])){
-    if(!preg_match('/php\:\/\/input/', $_GET['home'])){
-        if (preg_match('/'.basename($_SERVER['PHP_SELF'],'.php').'/', $_GET['home'])){
-            include($_GET['home'].'.php');
-        }
-    }
-}
-?>
+However, two important clues are spotted in the source:
+
+**Clue 1 — The navigation links use a `?home=` parameter:**
+
+```html
+<a href="index.php?home=about">About</a>
+<a href="index.php?home=projects">Projects</a>
+<a href="index.php?home=contact">Contact</a>
 ```
+
+This pattern strongly suggests the server is using the `home` parameter to **dynamically load pages** — likely passing it into a PHP `include()` or `require()` function on the backend. This is a classic indicator of a potential **Local File Inclusion (LFI)** vulnerability.
+
+**Clue 2 — The suspicious "Try Harder" message:**
+
+```
+Try Harder
+Wanna Buy Exploit...
+```
+
+This is an intentional hint from the challenge designer — it tells us to look deeper and try exploit techniques beyond basic navigation.
 
 <p align="center">
 <img width="939" height="329" alt="image" src="https://github.com/user-attachments/assets/251d7cd2-b82c-4123-8826-3ee817ca2d7f" />
 </p>
 
-### Why Is This Unsanitised?
+### Why Does the `?home=` Parameter Suggest LFI?
 
-The application takes the value from the URL parameter `?home=` and passes it directly into PHP's `include()` function. This means whatever is in the URL gets loaded and executed as a PHP file.
+When a website uses a URL parameter to load different pages like `?home=about`, `?home=projects`, the backend PHP code is likely doing something like this:
 
-The code does try to apply **3 filters** as weak protection:
+```php
+include($_GET['home'] . '.php');
+```
 
-| Filter | What it blocks | Why it fails |
-|--------|---------------|--------------|
-| `preg_match('/\.\./')` | Blocks `../` (directory traversal) | Does NOT block PHP wrappers like `php://filter` |
-| `preg_match('/php\:\/\/input/')` | Blocks `php://input` specifically | Does NOT block other wrappers like `php://filter` |
-| `preg_match('/index/')` | Only allows values containing the filename | `php://filter/.../resource=index` still contains "index" — passes! |
+This means whatever value is passed in `?home=` gets loaded as a file on the server. If the developer has **not properly validated** this input, an attacker can potentially:
 
-So the developer tried to block some attacks but left a gap — **`php://filter`** is not blocked and still passes all three checks. This makes the application vulnerable to **Local File Inclusion (LFI) via PHP wrappers**.
+- Try `?home=../../../../etc/passwd` to read system files (directory traversal)
+- Try PHP wrappers like `php://filter` to read the server's own PHP source files
+
+The first attempt using `../` directory traversal returned nothing — meaning the server likely has some basic filter against it. This leads to trying **PHP stream wrappers** instead.
 
 ---
 
