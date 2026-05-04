@@ -54,6 +54,7 @@ This allows attackers to:
 
 <img width="377" height="291" alt="image" src="https://github.com/user-attachments/assets/74e37b94-a862-4fea-bd8c-d90edb106d45" />
 
+
 1. User logs in successfully
 2. Server assigns role (user)
 3. Role is stored in a cookie
