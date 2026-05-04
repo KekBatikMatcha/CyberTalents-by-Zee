@@ -6,7 +6,7 @@
 ## Challenge Link
 http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/
 
-## Initial Interface
+## 1. Initial Interface
 
 This is the initial CyberTalents challenge page for **"Admin Has The Power"**.
 
@@ -16,7 +16,7 @@ It introduces the objective of the challenge, where only administrators are allo
 <img width="900" height="368" alt="image" src="https://github.com/user-attachments/assets/877e16af-492d-4c53-b87d-e43fb04a1d30" />
 </p>
 
-##  2. Login Interface
+## 2. Login Interface
 
 The login page displays a username and password field.
 
@@ -28,7 +28,7 @@ However, no valid credentials are provided directly to the user at this stage, s
 
 ---
 
-##  3. Source Code Analysis
+## 3. Source Code Analysis
 
 By inspecting the page source code, a hidden comment is discovered:
 
@@ -40,7 +40,7 @@ This indicates hardcoded credentials exposed in the client-side source code.
 <img width="959" height="385" alt="image" src="https://github.com/user-attachments/assets/15e011f1-50ec-4cc4-b586-c2b7a5d76e43" />
 </p>
 
-##  4. Successful Login
+## 4. Successful Login
 
 Using the discovered credentials (`support`), successful authentication is achieved and access to the user dashboard is granted.
 
@@ -50,7 +50,7 @@ Using the discovered credentials (`support`), successful authentication is achie
 
 ---
 
-##  5. Cookie Inspection (Browser DevTools)
+## 5. Cookie Inspection (Browser DevTools)
 
 Using browser Developer Tools → Application tab
 
@@ -62,7 +62,7 @@ A `role` value is identified, which controls user privileges.
 <img width="959" height="387" alt="image" src="https://github.com/user-attachments/assets/4abab43f-3ec2-4425-807a-2ccc9f8e4c60" />
 </p>
 
-##  6. Cookie Manipulation
+## 6. Cookie Manipulation
 
 The role value is modified from `support` to `admin`
 
@@ -73,7 +73,7 @@ After refreshing the page, access privileges are escalated.
 </p>
 
 
-##  7. Flag Obtained
+## 7. Flag Obtained
 
 After modifying the cookie, the application grants admin access and reveals the flag:
 
@@ -87,7 +87,7 @@ After modifying the cookie, the application grants admin access and reveals the 
 
 ##  Burp Suite Analysis
 
-## 🛠️ 8. Burp Suite Setup
+## 8. Burp Suite Setup
 
 Burp Suite is launched and Proxy Intercept mode is enabled.  
 
@@ -95,7 +95,7 @@ Burp Suite is launched and Proxy Intercept mode is enabled.
 <img width="953" height="462" alt="image" src="https://github.com/user-attachments/assets/19f06923-1cae-4825-b610-730149e03586" />
 </p>
 
-##  9. Accessing Challenge via Burp Browser
+## 9. Accessing Challenge via Burp Browser
 
 The browser is opened through Burp Suite to capture HTTP traffic.
 
@@ -103,7 +103,7 @@ The browser is opened through Burp Suite to capture HTTP traffic.
 <img width="959" height="491" alt="image" src="https://github.com/user-attachments/assets/cd6a58e1-dc48-4ad4-bb2c-a1e92aba79da" />
 </p>
 
-##  10. Intercepting Login Request
+## 10. Intercepting Login Request
 
 The challenge URL is opened inside the Burp Suite embedded browser to allow interception of requests.
 
@@ -111,7 +111,7 @@ The challenge URL is opened inside the Burp Suite embedded browser to allow inte
 <img width="269" height="107" alt="image" src="https://github.com/user-attachments/assets/adf86d96-99d1-48de-8bff-c0412120457c" />
 </p>
 
-##  11. Sending Request to Repeater
+## 11. Sending Request to Repeater
 
 During login using the `support` credentials, Burp Suite captures the HTTP request containing session cookies.
 
@@ -119,7 +119,7 @@ During login using the `support` credentials, Burp Suite captures the HTTP reque
 <img width="959" height="413" alt="image" src="https://github.com/user-attachments/assets/a4ab311c-60e9-4d30-83ff-206ffb9ffb8b" />
 </p>
 
-##  12. Response Analysis
+## 12. Response Analysis
 
 The intercepted request is forwarded to the **Repeater** tool for modification and testing.
 
@@ -127,7 +127,7 @@ The intercepted request is forwarded to the **Repeater** tool for modification a
 <img width="221" height="314" alt="image" src="https://github.com/user-attachments/assets/c948f10c-c673-45c6-8e01-174cf728f465" />
 </p>
 
-##  13. Cookie Manipulation via Burp Suite
+## 13. Cookie Manipulation via Burp Suite
 
 The server response is analyzed after sending the request, revealing the current session behavior.
 
@@ -143,7 +143,7 @@ The `role=support` value in the request header is modified to: `admin`
 
 The request is resent.
 
-## 🏁 14. Final Exploitation Result
+## 14. Final Exploitation Result
 
 After modifying the cookie in Burp Suite and resending the request, the server returns admin access and reveals the flag:
 
