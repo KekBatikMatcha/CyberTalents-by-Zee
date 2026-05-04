@@ -251,12 +251,8 @@ The same Base64 string is also decoded using the online tool [https://www.base64
 
 At the very top of the decoded source, the flag is hardcoded:
 
-```php
-<?php
-
+```
 $flag = "{pHp_Wr4P3rs_4r3_Us3fuL}";
-
-?>
 ```
 
 > **FLAG: `{pHp_Wr4P3rs_4r3_Us3fuL}`**
