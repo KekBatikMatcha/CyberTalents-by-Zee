@@ -67,7 +67,7 @@ The role value is modified from `support` to `àdmin`
 After refreshing the page, access privileges are escalated.
 
 <p align="center">
-<img width="959" height="29" alt="image" src="https://github.com/user-attachments/assets/579d9082-77ae-4d5a-8dfa-2c5f67b0478c" />
+<img width="400" height="29" alt="image" src="https://github.com/user-attachments/assets/579d9082-77ae-4d5a-8dfa-2c5f67b0478c" />
 </p>
 
 
