@@ -11,6 +11,8 @@
 
 <img width="944" height="428" alt="image" src="https://github.com/user-attachments/assets/52d72f11-3e45-4105-888f-2b476543d50f" />
 
+test the sql injection using 'OR'1'='1'
+
 <img width="414" height="149" alt="image" src="https://github.com/user-attachments/assets/6ccb2c26-0ea1-474d-a30f-18f7c93222a9" />
 
 <img width="942" height="311" alt="image" src="https://github.com/user-attachments/assets/a7293b27-e5db-4a27-a5ba-0e4532a49754" />
