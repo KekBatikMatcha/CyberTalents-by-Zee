@@ -6,7 +6,7 @@
 **Administrators only has the power to see the flag, can you be one?**
 
 ## Challenge Link
-http://cdcamxwl32pue3e6m5p6v4ehxzg1rm236mnkmugv0-web.cybertalentslabs.com/
+https://cybertalents.com/challenges/web/admin-has-the-power
 
 ---
 
