@@ -84,6 +84,10 @@ When input is **not sanitised**, whatever the user types is passed directly into
 
 To confirm the vulnerability, a classic SQL injection payload is submitted in the comment input field:
 
+<p align="center">
+<img width="414" height="149" alt="image" src="https://github.com/user-attachments/assets/6ccb2c26-0ea1-474d-a30f-18f7c93222a9" />
+</p>
+
 ```sql
 ' OR '1'='1'
 ```
@@ -110,11 +114,12 @@ Since `'1'='1'` is always `true`, the `WHERE` condition is bypassed and the quer
 
 The application returns the error:
 
+<p align="center">
+<img width="942" height="311" alt="image" src="https://github.com/user-attachments/assets/a7293b27-e5db-4a27-a5ba-0e4532a49754" />
+</p>
+
 > **"unrecognized token"**
 
-<p align="center">
-<img width="414" height="149" alt="image" src="https://github.com/user-attachments/assets/6ccb2c26-0ea1-474d-a30f-18f7c93222a9" />
-</p>
 
 This is actually a **good sign** for the attacker. The error means:
 - The input was **not sanitised** — it was passed raw into the SQL query
@@ -141,10 +146,6 @@ To identify the database engine, the following payload is injected:
 | `));--` | Closes open brackets and comments out the rest of the original query |
 
 The application returns the version number **`3.8.7.1`** in the comment list, confirming the backend database is **SQLite**. Knowing the database engine is critical — different databases have different syntax, functions, and system tables that need to be used for further exploitation.
-
-<p align="center">
-<img width="942" height="311" alt="image" src="https://github.com/user-attachments/assets/a7293b27-e5db-4a27-a5ba-0e4532a49754" />
-</p>
 
 ---
 
