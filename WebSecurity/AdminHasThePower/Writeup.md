@@ -52,7 +52,9 @@ Using the discovered credentials (`support`), successful authentication is achie
 
 ##  5. Cookie Inspection (Browser DevTools)
 
-Using browser Developer Tools → Application tab, the session cookie is inspected.
+Using browser Developer Tools → Application tab
+
+the session cookie is inspected.
 
 A `role` value is identified, which controls user privileges.
 
@@ -62,7 +64,7 @@ A `role` value is identified, which controls user privileges.
 
 ##  6. Cookie Manipulation
 
-The role value is modified from `support` to `àdmin`
+The role value is modified from `support` to `admin`
 
 After refreshing the page, access privileges are escalated.
 
