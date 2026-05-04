@@ -11,7 +11,7 @@ http://cdcamxwl32pue3e6m4m2360mtg301m236mnkmugv0-web.cybertalentslabs.com/
 ---
 <img width="699" height="355" alt="image" src="https://github.com/user-attachments/assets/cdeaa756-d659-46db-8570-b3064961dc92" />
 
-<img width="294" height="121" alt="image" src="https://github.com/user-attachments/assets/49458f34-be8f-459a-aa3e-a30a39633e67" />
+<img width="944" height="415" alt="image" src="https://github.com/user-attachments/assets/a61d1955-198d-4083-96a2-4c4263a372da" />
 
 <img width="945" height="429" alt="image" src="https://github.com/user-attachments/assets/5736633d-0bbd-4549-8be4-ace90550c205" />
 
