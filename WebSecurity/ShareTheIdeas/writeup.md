@@ -253,7 +253,7 @@ Using `+` keeps the payload readable while still being correctly interpreted by 
 The modified request is sent via Repeater and the server responds with `flag245698`, confirming the vulnerability is fully exploitable at the HTTP request level — not just through the browser interface.
 
 <p align="center">
-<img width="743" height="368" alt="image" src="https://github.com/user-attachments/assets/3eaa2aa8-d515-42fa-bd85-d672db9a79e0" />
+<img width="718" height="350" alt="image" src="https://github.com/user-attachments/assets/d2698aff-f98a-4286-be25-a103f61236c1" />
 </p>
 
 ### Why Is the Input Not Sanitised?
